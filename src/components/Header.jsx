@@ -21,7 +21,9 @@ function SearchForm() {
     const onSubmit = e => {
         e.preventDefault();
     }
-
+    const searchBtn = e => {
+        window.location.replace('/search');
+    }
     return (
         <form onSubmit={onSubmit} className='absolute  translate-x-1/2 right-1/2 -bottom-10 bg-white text-zinc-800 rounded-lg border-4 border-yellow-600'>
             <div className="flex justify-around items-center gap-5 py-2 px-12">
@@ -39,7 +41,7 @@ function SearchForm() {
                     <input type="text" placeholder='1 adult - 0 children - 0 room' className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500' />
                 </div>
                 <div className='flex gap-2 items-center'>
-                    <Button label='Search' className=' bg-blue-600 text-white py-3 px-3' />
+                    <Button label='Search' onClick={searchBtn} className=' bg-blue-600 text-white py-3 px-3' />
                 </div>
                 {/* <input type="date" min='2022-06-22' max='2024-06-22' placeholder='YYYY-MM-DD' /> */}
             </div>
