@@ -14,6 +14,6 @@
     color: var(--main-color);
 }
 
-.pointer {
+.pointer:hover {
     cursor: pointer;
 }
