@@ -1,20 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBed, faPlane, faCar, faTaxi } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBed, faPlane, faCar, faTaxi } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button'
 import data from '../../data/navBar.json';
-import { useState } from "react";
+import { useState } from 'react';
 
 
 function Navbar() {
-    const btnClasses = "text-base text-main-color bg-gray-50 px-4 hover:bg-gray-600 hover:text-white";
+    const btnClasses = 'text-base text-main-color bg-gray-50 px-4 hover:bg-gray-600 hover:text-white';
 
     return (
-        <div className="bg-main-color text-white py-4 px-5 md:px-7">
-            <div className="container mx-auto">
+        <div className='bg-main-color text-white py-4 px-5 md:px-7'>
+            <div className='container mx-auto'>
 
-                <div className="flex justify-between text-xl md:text-2xl">
+                <div className='flex justify-between text-xl md:text-2xl'>
                     <div>Booking Website</div>
-                    <div className="flex gap-5">
+                    <div className='flex gap-5'>
                         <Button label={'Register'} className={btnClasses} />
                         <Button label={'Login'} className={btnClasses} />
                     </div>
@@ -31,7 +31,7 @@ function NavbarItems({ data }) {
         setActive(index);
     }
     return (
-        <div className="pt-5 flex md:gap-8">
+        <div className='pt-5 flex md:gap-8'>
             {
                 data.map((item, i) => {
                     const isActive = active === i ? true : false;
