@@ -1,0 +1,4 @@
+.grid-search-item {
+    grid-template-columns: 1fr 1.25fr 1fr;
+
+}
