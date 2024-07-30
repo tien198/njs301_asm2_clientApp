@@ -18,7 +18,7 @@ const Search = () => {
           <SearchDiv />
         </div>
         {/* responsive lg:col-start-2 lg:col-end-5 */}
-        <div className='lg:col-start-2 lg:col-end-5'>
+        <div className='lg:col-start-2 lg:col-end-5 flex flex-col gap-3'>
           {
             dataSearched.map(data => {
               return <SearchedItem item={data} key={data.image_url} />
@@ -83,15 +83,15 @@ function SearchDiv() {
 function SearchedItem({ item }) {
   const freeCancel = item.free_cancel ?
     [
-      <strong className='text-green-600'>Free cancellation</strong>,
-      <p className='text-green-600'>You can cancel later, so lock in this great price today!</p>
+      <strong className='text-green-600' key={1}>Free cancellation</strong>,
+      <p className='text-green-600' key={2}>You can cancel later, so lock in this great price today!</p>
     ] : null;
 
   return (
     <div className={`grid ${styles['grid-search-item']} items-center gap-4 p-3 rounded-lg border`}>
       <ImgCard imgUrl={item.image_url} imgAlt={item.name} />
       {/* <div style={{ backgroundImage: `url(${item.image_url})` }} className='bg-cover h-full w-full' ></div> */}
-      <div className='flex flex-col gap-1 lg:justify-between'>
+      <div className='flex flex-col h-full gap-1 justify-between'>
         <h3 className='text-xl font-semibold lg:font-bold text-blue-600'>{item.name}</h3>
         <p>{item.distance} from center</p>
         <p><span className='bg-green-600 text-white rounded p-1'>{item.tag}</span></p>

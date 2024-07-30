@@ -15,7 +15,7 @@ function Imgcard({ imgUrl, imgAlt, ...props }) {
 
     return (
         <div className={`overflow-hidden relative w-full`} {...props} style={{ height: imgHeight }} >
-            <img src={imgUrl} alt={imgAlt} className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2' onLoad={onSetImgHeight} />
+            <img src={imgUrl} alt={imgAlt} className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-max w-max' onLoad={onSetImgHeight} />
         </div>
     );
 }
