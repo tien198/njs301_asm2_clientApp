@@ -1,4 +1,9 @@
 .grid-search-item {
-    grid-template-columns: 1fr 1.25fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
 
+@media (min-width:768px) {
+    .grid-search-item {
+        grid-template-columns: 1fr 1.25fr 1fr;
+    }
 }

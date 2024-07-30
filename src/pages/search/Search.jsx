@@ -2,31 +2,28 @@ import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
+import ImgCard from '../../components/Imgcard';
 // Data to display
 import dataSearched from '../../../data/search.json';
 import styles from './Search.module.css';
 
 const Search = () => {
-  const [imgHeigh, setImgHeigh] = useState('10px');
 
-  const onSetImgHeigh = e => {
-    setImgHeigh(e.currentTarget.offsetWidth + 'px')
 
-    // setImgHeigh(prev => {
-    // console.log(e.currentTarget.offsetWidth);
-    // return e.currentTarget.offsetWidth;
-    // });
-  }
   return (
     <>
       <Navbar />
       <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 container mx-auto mt-6'>
-        <SearchDiv />
+        <div>
+          <SearchDiv />
+        </div>
         {/* responsive lg:col-start-2 lg:col-end-5 */}
         <div className='lg:col-start-2 lg:col-end-5'>
-          <div className={`grid ${styles['grid-search-item']} p-3 rounded-lg border`}>
-            <div style={{ backgroundImage: `url(${dataSearched[0].image_url})`, height: imgHeigh }} className='w-full bg-cover' onClick={onSetImgHeigh} ></div>
-          </div>
+          {
+            dataSearched.map(data => {
+              return <SearchedItem item={data} key={data.image_url} />
+            })
+          }
         </div>
       </div>
 
@@ -81,4 +78,27 @@ function SearchDiv() {
       </form>
     </div>
   )
+}
+
+function SearchedItem({ item }) {
+  const freeCancel = item.free_cancel ?
+    [
+      <strong className='text-green-600'>Free cancellation</strong>,
+      <p className='text-green-600'>You can cancel later, so lock in this great price today!</p>
+    ] : null;
+
+  return (
+    <div className={`grid ${styles['grid-search-item']} items-center gap-4 p-3 rounded-lg border`}>
+      <ImgCard imgUrl={item.image_url} imgAlt={item.name} />
+      {/* <div style={{ backgroundImage: `url(${item.image_url})` }} className='bg-cover h-full w-full' ></div> */}
+      <div className='flex flex-col gap-1 lg:justify-between'>
+        <h3 className='text-xl font-semibold lg:font-bold text-blue-600'>{item.name}</h3>
+        <p>{item.distance} from center</p>
+        <p><span className='bg-green-600 text-white rounded p-1'>{item.tag}</span></p>
+        <p className='font-semibold'>{item.description}</p>
+        <p>{item.type}</p>
+        {freeCancel}
+      </div>
+    </div>
+  );
 }
