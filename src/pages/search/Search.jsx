@@ -4,6 +4,7 @@ import ImgCard from '../../components/Imgcard';
 // Data to display
 import dataSearched from '../../../data/search.json';
 import styles from './Search.module.css';
+import { Link } from 'react-router-dom';
 
 const Search = () => {
 
@@ -114,7 +115,9 @@ function SearchedItemThirdCol({ item }) {
       <div className='flex flex-col items-end gap-2'>
         <span className='text-3xl font-semibold'>$ {item.price}</span>
         <span className='text-gray-500 text-sm'>Include taxes and fees</span>
-        <Button label='See availability' className='bg-blue-600 text-white hover:bg-blue-800 font-semibold rounded-md py-3 px-8' />
+        <Link to='/detail/1'>
+          <Button label='See availability' className='bg-blue-600 text-white hover:bg-blue-800 font-semibold rounded-md py-3 px-8' />
+        </Link>
       </div>
     </div>
   );
