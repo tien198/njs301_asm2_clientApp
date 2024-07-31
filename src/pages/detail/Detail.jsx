@@ -1,9 +1,7 @@
-import Navbar from '../../components/Navbar';
 
 const Detail = () => {
   return (
     <>
-      <Navbar />
     </>
   );
 };

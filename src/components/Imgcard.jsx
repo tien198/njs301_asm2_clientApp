@@ -11,7 +11,6 @@ function Imgcard({ imgUrl, imgAlt, ...props }) {
     let [isScale, setIsScale] = useState(false);
 
     const onSetImgHeight = e => {
-        console.log(e.currentTarget);
         if (e.currentTarget.offsetWidth > 600)
             setIsScale(true);
         setImgHeight(e.currentTarget.parentElement.offsetWidth + 'px')

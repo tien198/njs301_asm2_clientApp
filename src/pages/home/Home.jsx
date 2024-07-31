@@ -1,7 +1,5 @@
-import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
-import RegisterForm from '../../components/RegisterForm';
-import Footer from '../../components/Footer';
+import Contact from '../../components/Contact';
 // Data to display
 import cities from '../../../data/city.json';
 import types from '../../../data/type.json';
@@ -11,11 +9,9 @@ import hotelList from '../../../data/hotel_list.json';
 const Home = () => {
 	return (
 		<div>
-			<Navbar />
 			<Header />
 			<HomeContents />
-			<RegisterForm />
-			<Footer />
+			<Contact />
 		</div >
 	);
 };

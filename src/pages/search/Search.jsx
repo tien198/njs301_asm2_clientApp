@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import ImgCard from '../../components/Imgcard';
 // Data to display
@@ -9,10 +7,8 @@ import styles from './Search.module.css';
 
 const Search = () => {
 
-
   return (
     <>
-      <Navbar />
       <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 container mx-auto mt-6'>
         <div>
           <SearchDiv />
@@ -26,8 +22,6 @@ const Search = () => {
           }
         </div>
       </div>
-
-      <Footer />
     </>
   );
 };
