@@ -30,13 +30,30 @@ function SearchForm() {
     }
 
     const [dateRangeHidden, setDateRangeHidden] = useState(false);
-    const [state, setState] = useState([
+    const [date, setDate] = useState([
         {
             startDate: new Date(),
-            endDate: null,
+            endDate: new Date(),
             key: 'selection'
         }
     ]);
+
+    function dateStr(date) {
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    }
+    function convertDateRangeToString(date) {
+        return `${dateStr(date[0].startDate)} to ${dateStr(date[0].endDate)}`;
+    }
+    function convertStringToDateRange(str) {
+        const d = str.split(' to ');
+        return [{
+            startDate: new Date(d[0]),
+            endDate: new Date(d[1]),
+            key: 'selection'
+        }]
+    }
+
+    const [dateVal, setDateVal] = useState(convertDateRangeToString(date));
 
     const setDateHidden = e => {
         setDateRangeHidden(prev => {
@@ -44,12 +61,18 @@ function SearchForm() {
             return true;
         })
     }
-    const setDate = e => {
-        console.log(e.selection);
-        setState([e.selection])
 
+    const onSetDateVal = e => {
+        setDateVal(e.target.value);
+        setDate(convertStringToDateRange(e.target.value))
     }
-    const hiddenClass = dateRangeHidden ? 'hidden' : '';
+
+    const onSetDate = e => {
+        setDate([e.selection]);
+        setDateVal(convertDateRangeToString([e.selection]));
+    }
+
+    const hiddenClass = dateRangeHidden ? '' : 'hidden';
     // const hiddenClass = '';
     // const searchBtn = e => {
     //     window.location.replace('/search');
@@ -63,14 +86,14 @@ function SearchForm() {
                 </div>
                 <div className='flex gap-2 items-center relative z-50' onClick={setDateHidden}>
                     <FontAwesomeIcon icon={faCalendar} className='text-gray-400 ' />
-                    <input type='text' pattern='\d{4}-\d{2}-\d{2}' placeholder='2022-06-24 to 2022-06-24' className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500 relative   ' />
+                    <input type='text' value={dateVal} onChange={onSetDateVal} pattern='\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}' placeholder='2022-06-24 to 2022-06-24' className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500 relative   ' />
                     {/* placeholder='06/24/2022 to 06/24/2024' */}
                 </div>
                 <DateRange
                     editableDateInputs={true}
-                    onChange={setDate}
+                    onChange={onSetDate}
                     moveRangeOnFirstSelection={false}
-                    ranges={state}
+                    ranges={date}
                     className={`absolute top-12  ${hiddenClass}`} minDate={new Date(2022, 1, 1)} maxDate={new Date(Date.now())} />
                 <div className='flex gap-2 items-center'>
                     <FontAwesomeIcon icon={faFemale} className='text-gray-400 ' />
