@@ -10,6 +10,18 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
 
 export default function Header() {
+
+    // Set hidden DateRange and overlay to trigger visibe
+    const [dateRangeHidden, setDateRangeHidden] = useState(false);
+    const hiddenClass = dateRangeHidden ? '' : 'hidden';
+
+    const setDateHidden = e => {
+        setDateRangeHidden(prev => {
+            if (prev) return false;
+            return true;
+        })
+    }
+
     return (
         <div className='bg-main-color text-white pt-10 pb-20 relative px-5 md:px-7'>
             <div className='container mx-auto flex flex-col gap-8'>
@@ -18,18 +30,19 @@ export default function Header() {
                 <div>
                     <Button label='Sign in/Register' className='bg-blue-500 text-white px-3 py-4' />
                 </div>
-                <SearchForm />
+                <SearchForm setDateHidden={setDateHidden} hiddenClass={hiddenClass} />
             </div>
+            <div className={`${hiddenClass} fixed -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-screen h-screen z-40`} onClick={setDateHidden}></div>
+
         </div>
     )
 }
 
-function SearchForm() {
+function SearchForm({ setDateHidden, hiddenClass }) {
     const onSubmit = e => {
         e.preventDefault();
     }
 
-    const [dateRangeHidden, setDateRangeHidden] = useState(false);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -55,13 +68,6 @@ function SearchForm() {
 
     const [dateVal, setDateVal] = useState(convertDateRangeToString(date));
 
-    const setDateHidden = e => {
-        setDateRangeHidden(prev => {
-            if (prev) return false;
-            return true;
-        })
-    }
-
     const onSetDateVal = e => {
         setDateVal(e.target.value);
         setDate(convertStringToDateRange(e.target.value))
@@ -72,7 +78,6 @@ function SearchForm() {
         setDateVal(convertDateRangeToString([e.selection]));
     }
 
-    const hiddenClass = dateRangeHidden ? '' : 'hidden';
     // const hiddenClass = '';
     // const searchBtn = e => {
     //     window.location.replace('/search');
