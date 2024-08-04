@@ -23,7 +23,7 @@ export default function Header() {
     }
 
     return (
-        <div className='bg-main-color text-white pt-10 pb-20 relative px-5 md:px-7'>
+        <div className='bg-main-color text-white pt-10 pb-52 md:pb-20 relative px-5 md:px-7'>
             <div className='container mx-auto flex flex-col gap-8'>
                 <h2 className='text-3xl font-semibold'>A lifetime of discounts? It's Genius.</h2>
                 <p>Get rewared for your travels - unlocking instant saving of 10% or more with a free account</p>
@@ -83,7 +83,7 @@ function SearchForm({ setDateHidden, hiddenClass }) {
     //     window.location.replace('/search');
     // }
     return (
-        <form onSubmit={onSubmit} className='absolute  translate-x-1/2 right-1/3 -bottom-14 lg:right-1/2 lg:-bottom-10 bg-white text-zinc-800 rounded-lg border-4 border-yellow-600 z-50'>
+        <form onSubmit={onSubmit} className='absolute translate-x-1/2 right-1/2 -bottom-14 lg:right-1/2 lg:-bottom-10 bg-white text-zinc-800 rounded-lg border-4 border-yellow-600 z-50'>
             <div className='flex justify-around items-center flex-wrap lg:flex-nowrap gap-5 py-2 px-12'>
                 <div className='flex gap-2 items-center'>
                     <FontAwesomeIcon icon={faBed} className='text-gray-400 ' />

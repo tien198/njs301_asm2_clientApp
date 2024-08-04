@@ -5,10 +5,10 @@ import Button from '../../components/Button';
 
 const Detail = () => {
   return (
-    <div className='container mx-auto mt-6'>
+    <div className='container mx-auto mt-6 px-5 md:px-7'>
       <GeneralInfo item={item} key={1} />
       <ImgGallery photos={item.photos} />
-      <div className='grid grid-cols-4 gap-4 mt-10'>
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-4 mt-10'>
         <div className='col-start-1 col-end-4 flex flex-col gap-5'>
           <p className='text-2xl font-bold'>{item.title}</p>
           <span className='text-sm'>{item.description}</span>

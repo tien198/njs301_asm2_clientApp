@@ -3,7 +3,7 @@ import footerData from '../../data/footer.json';
 
 function Footer() {
     return (
-        <div className='grid grid-cols-3 lg:grid-cols-5 gap-12 pt-14 pb-12 container m-auto text-main-color'>
+        <div className='grid grid-cols-3 lg:grid-cols-5 gap-12 pt-14 pb-12 container m-auto text-main-color px-5 md:px-7'>
             <FooterCols data={footerData} />
         </div>
     );
