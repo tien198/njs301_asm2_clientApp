@@ -19,5 +19,6 @@ module.exports = {
     ],
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
+    'react-refresh/only-export-components': 'off'
   },
 }
