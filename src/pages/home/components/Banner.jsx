@@ -1,12 +1,12 @@
-import Button from '../Button';
+import Button from '../../../components/Button';
 
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
 
-import SearchForm from './HeaderSearchForm';
+import SearchForm from './BannerSearchForm';
 
-export default function Header() {
+export default function Banner() {
 
     // Set hidden DateRange and overlay to trigger visibe
     const [dateRangeHidden, setDateRangeHidden] = useState(false);
@@ -14,10 +14,7 @@ export default function Header() {
 
     // eslint-disable-next-line no-unused-vars
     const setDateHidden = e => {
-        setDateRangeHidden(prev => {
-            if (prev) return false;
-            return true;
-        })
+        setDateRangeHidden(!dateRangeHidden)
     }
 
     return (

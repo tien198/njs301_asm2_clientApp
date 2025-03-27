@@ -1,21 +1,23 @@
+import { Await, useLoaderData } from 'react-router-dom';
+import { Suspense } from 'react';
+
 import Fallback from '../../components/Fallback';
-import Header from '../../components/layouts/Header';
+import Banner from './components/Banner';
 import Contact from '../../components/Contact';
 
 import BackendURI from '../../utils/backendUri';
 
-import CitiesList from './CityList';
-import TypesBrowse from './TypesBrowse';
-import HotelList from './HotelList';
-import { Await, useLoaderData } from 'react-router-dom';
-import { Suspense } from 'react';
+import TypesList from './components/TypesList';
+import CitiesList from './components/CitiesList';
+import HotelsList from './components/HotelsList';
+
 
 
 const Home = () => {
 
 	return (
 		<div>
-			<Header />
+			<Banner />
 			<HomeContents />
 			<Contact />
 		</div >
@@ -40,7 +42,7 @@ function HomeContents() {
 			<Suspense fallback={<Fallback />}>
 				<Await resolve={types}>
 					{types =>
-						<TypesBrowse types={types} />
+						<TypesList types={types} />
 					}
 				</Await>
 			</Suspense>
@@ -48,7 +50,7 @@ function HomeContents() {
 			<Suspense fallback={<Fallback />}>
 				<Await resolve={hotels}>
 					{hotels =>
-						<HotelList hList={hotels} />
+						<HotelsList hList={hotels} />
 					}
 				</Await>
 			</Suspense>
@@ -57,9 +59,9 @@ function HomeContents() {
 }
 
 export async function loader() {
-	const cities = fetch(BackendURI.cities).then(res => res.json())
-	const types = fetch(BackendURI.types).then(res => res.json())
-	const hotels = fetch(BackendURI.hotels).then(res => res.json())
+	const cities = fetch(BackendURI.cities).then(res => res.json()).catch(err => console.log(err)).then(json => json || [])
+	const types = fetch(BackendURI.types).then(res => res.json()).catch(err => console.log(err)).then(json => json || [])
+	const hotels = fetch(BackendURI.hotels).then(res => res.json()).catch(err => console.log(err)).then(json => json || [])
 
 	// alter deffer, in react-router-dom v6, return a promise, hear is response.json()
 	return {
