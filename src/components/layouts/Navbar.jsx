@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faPlane, faCar, faTaxi } from '@fortawesome/free-solid-svg-icons';
-import Button from './Button'
-import data from '../../data/navBar.json';
+import Button from '../Button'
+import data from '../../../data/navBar.json';
 import { useState } from 'react';
 
 

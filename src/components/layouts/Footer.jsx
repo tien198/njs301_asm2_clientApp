@@ -1,5 +1,4 @@
-import React from 'react';
-import footerData from '../../data/footer.json';
+import footerData from '../../../data/footer.json';
 
 function Footer() {
     return (

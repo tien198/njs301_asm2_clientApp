@@ -1,17 +1,17 @@
 [
 	{
-		"name": "Dublin",
-		"subText": "123 properties",
-		"image": "./images/city_1.webp"
+		"name": "Ha noi",
+		"subText": "3 properties",
+		"image": "/city-images/ha-noi.jpg"
 	},
 	{
-		"name": "Reno",
-		"subText": "533 properties",
-		"image": "./images/city_2.webp"
+		"name": "Ho Chi Minh",
+		"subText": "1 properties",
+		"image": "/city-images/hcm.jpg"
 	},
 	{
-		"name": "Austin",
-		"subText": "532 properties",
-		"image": "./images/city_3.webp"
+		"name": "Da Nang",
+		"subText": "0 properties",
+		"image": "/city-images/da-nang.jpg"
 	}
 ]
