@@ -9,8 +9,24 @@ import { format } from 'date-fns'
 
 import Button from '../../../components/Button';
 
+import BannerSearchForm_Options from './BannerSearchForm_Options';
+
+
+function convertDateRangeToString(date) {
+    return `${format(date[0].startDate, 'yyyy/MM/dd')} to ${format(date[0].endDate, 'yyyy/MM/dd')}`;
+}
+
+function convertStringToDateRange(str) {
+    const d = str.split(' to ');
+    return [{
+        startDate: new Date(d[0]),
+        endDate: new Date(d[1]),
+        key: 'selection'
+    }]
+}
 
 export default function SearchForm({ setDateHidden, hiddenClass }) {
+    const navigate = useNavigate()
 
     const [date, setDate] = useState([
         {
@@ -18,23 +34,11 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
             endDate: new Date(),
             key: 'selection'
         }
-    ]);
-
-    function convertDateRangeToString(date) {
-        return `${format(date[0].startDate, 'yyyy/MM/dd')} to ${format(date[0].endDate, 'yyyy/MM/dd')}`;
-    }
-    function convertStringToDateRange(str) {
-        const d = str.split(' to ');
-        return [{
-            startDate: new Date(d[0]),
-            endDate: new Date(d[1]),
-            key: 'selection'
-        }]
-    }
+    ])
 
     const [dateVal, setDateVal] = useState(convertDateRangeToString(date));
 
-    const onSetDateInputVal = e => {
+    function onSetDateInputVal(e) {
         setDateVal(e.target.value);
         setDate(prev => {
             let dateRange = convertStringToDateRange(e.target.value)
@@ -45,20 +49,32 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                 return prev
         })
     }
-
-    const onSetDateBox = e => {
+    function onSetDateBox(e) {
         setDate([e.selection]);
         setDateVal(convertDateRangeToString([e.selection]));
     }
 
     const [destination, setDestination] = useState('')
-
-    const navigate=useNavigate()
-    const onSubmit = e => {
+    function onSubmit(e) {
         e.preventDefault();
         const dateRangeVal = convertDateRangeToString(date)
+        navigate('/search', { state: { destination, dateRangeVal } })
+    }
 
-        navigate('/search', {state: {destination, dateRangeVal}})
+    const [openOptions, setOpenOptions] = useState(false);
+    const [options, setOptions] = useState({
+        adult: 1,
+        children: 0,
+        room: 1,
+    })
+
+    function handleOption(name, operation) {
+        setOptions((prev) => {
+            return {
+                ...prev,
+                [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+            }
+        })
     }
 
     return (
@@ -68,8 +84,9 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                     <FontAwesomeIcon icon={faBed} className='text-gray-400 ' />
                     <input type='text' placeholder={` Where are you going?`}
                         className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500'
-                        value={destination} onChange={e =>  setDestination(e.target.value)} />
+                        value={destination} onChange={e => setDestination(e.target.value)} />
                 </div>
+
                 <div className='flex gap-2 items-center relative z-50' onClick={setDateHidden}>
                     <FontAwesomeIcon icon={faCalendar} className='text-gray-400 ' />
                     {/* <input type='text' value={dateVal} onChange={onSetDateInputVal} pattern='\d{4}/\d{2}/\d{2} to \d{4}/\d{2}/\d{2}' placeholder='2022-06-24 to 2022-06-24' className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500 relative   ' /> */}
@@ -82,10 +99,19 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className={`absolute top-12  ${hiddenClass}`} minDate={new Date(2022, 1, 1)} maxDate={new Date(Date.now())} />
+
                 <div className='flex gap-2 items-center'>
                     <FontAwesomeIcon icon={faFemale} className='text-gray-400 ' />
-                    <input type='text' placeholder='1 adult - 0 children - 0 room' className='p-1 focus: outline-none focus:border-b focus:border-b-slate-500' />
+
+                    <span onClick={() => setOpenOptions(!openOptions)}
+                        className="headerSearchText">
+                        {`${options.adult} adult · ${options.children} children · ${options.room} room`}
+                    </span>
+                    {openOptions &&
+                        <BannerSearchForm_Options options={openOptions} handleOption={handleOption} />
+                    }
                 </div>
+
                 <div className='flex gap-2 items-center'>
                     {/* <Link to='search'> */}
                     <Button label='Search' className=' bg-blue-600 text-white py-3 px-3' />
