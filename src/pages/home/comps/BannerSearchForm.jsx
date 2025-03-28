@@ -5,25 +5,13 @@ import { useState } from 'react'
 // react-date-range
 import { useNavigate } from 'react-router-dom'
 import { DateRange } from 'react-date-range'
-import { format } from 'date-fns'
 
 import Button from '../../../components/Button'
 
 import BannerSearchForm_Options from './BannerSearchForm_Options'
+import { convertDateRangeToString, convertStringToDateRange } from '../utils/dateRangeUtils'
 
 
-function convertDateRangeToString(date) {
-    return `${format(date[0].startDate, 'yyyy/MM/dd')} to ${format(date[0].endDate, 'yyyy/MM/dd')}`
-}
-
-function convertStringToDateRange(str) {
-    const d = str.split(' to ')
-    return [{
-        startDate: new Date(d[0]),
-        endDate: new Date(d[1]),
-        key: 'selection'
-    }]
-}
 
 export default function SearchForm({ setDateHidden, hiddenClass }) {
     const navigate = useNavigate()

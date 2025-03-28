@@ -5,7 +5,7 @@ import Fallback from '../../components/Fallback';
 import Banner from './comps/Banner';
 import Contact from '../../components/Contact';
 
-import BackendURI from '../../utils/backendUri';
+import BackendURI from '../../utilities/backendUri';
 
 import TypesList from './comps/TypesList';
 import CitiesList from './comps/CitiesList';

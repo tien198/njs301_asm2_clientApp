@@ -1,4 +1,4 @@
-import BackendUri from '../../../utils/backendUri'
+import BackendUri from '../../../utilities/backendUri'
 
 function City({ city }) {
 	return (
