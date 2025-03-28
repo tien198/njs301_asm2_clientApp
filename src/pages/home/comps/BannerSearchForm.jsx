@@ -1,23 +1,23 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faCalendar, faFemale } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBed, faCalendar, faFemale } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 
 // react-date-range
-import { useNavigate } from 'react-router-dom';
-import { DateRange } from 'react-date-range';
+import { useNavigate } from 'react-router-dom'
+import { DateRange } from 'react-date-range'
 import { format } from 'date-fns'
 
-import Button from '../../../components/Button';
+import Button from '../../../components/Button'
 
-import BannerSearchForm_Options from './BannerSearchForm_Options';
+import BannerSearchForm_Options from './BannerSearchForm_Options'
 
 
 function convertDateRangeToString(date) {
-    return `${format(date[0].startDate, 'yyyy/MM/dd')} to ${format(date[0].endDate, 'yyyy/MM/dd')}`;
+    return `${format(date[0].startDate, 'yyyy/MM/dd')} to ${format(date[0].endDate, 'yyyy/MM/dd')}`
 }
 
 function convertStringToDateRange(str) {
-    const d = str.split(' to ');
+    const d = str.split(' to ')
     return [{
         startDate: new Date(d[0]),
         endDate: new Date(d[1]),
@@ -36,10 +36,10 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
         }
     ])
 
-    const [dateVal, setDateVal] = useState(convertDateRangeToString(date));
+    const [dateVal, setDateVal] = useState(convertDateRangeToString(date))
 
     function onSetDateInputVal(e) {
-        setDateVal(e.target.value);
+        setDateVal(e.target.value)
         setDate(prev => {
             let dateRange = convertStringToDateRange(e.target.value)
             const defRange = dateRange[0]
@@ -50,18 +50,13 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
         })
     }
     function onSetDateBox(e) {
-        setDate([e.selection]);
-        setDateVal(convertDateRangeToString([e.selection]));
+        setDate([e.selection])
+        setDateVal(convertDateRangeToString([e.selection]))
     }
 
     const [destination, setDestination] = useState('')
-    function onSubmit(e) {
-        e.preventDefault();
-        const dateRangeVal = convertDateRangeToString(date)
-        navigate('/search', { state: { destination, dateRangeVal } })
-    }
 
-    const [openOptions, setOpenOptions] = useState(false);
+    const [openOptions, setOpenOptions] = useState(false)
     const [options, setOptions] = useState({
         adult: 1,
         children: 0,
@@ -75,6 +70,12 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                 [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
             }
         })
+    }
+
+    function onSubmit(e) {
+        e.preventDefault()
+        const dateRange = convertDateRangeToString(date)
+        navigate('/search', { state: { destination, dateRange, options } })
     }
 
     return (
@@ -113,9 +114,9 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                 </div>
 
                 <div className='flex gap-2 items-center'>
-                    {/* <Link to='search'> */}
-                    <Button label='Search' className=' bg-blue-600 text-white py-3 px-3' />
-                    {/* </Link> */}
+                    <Button className=' bg-blue-600 text-white py-3 px-3'>
+                        Search
+                    </Button>
                 </div>
                 {/* <input type='date' min='2022-06-22' max='2024-06-22' placeholder='YYYY-MM-DD' /> */}
             </div>

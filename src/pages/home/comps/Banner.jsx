@@ -23,7 +23,9 @@ export default function Banner() {
                 <h2 className='text-3xl font-semibold'>A lifetime of discounts? It's Genius.</h2>
                 <p>Get rewared for your travels - unlocking instant saving of 10% or more with a free account</p>
                 <div>
-                    <Button label='Sign in/Register' className='bg-blue-500 text-white px-3 py-4' />
+                    <Button className='bg-blue-500 text-white px-3 py-4'>
+                        Sign in/Register
+                    </Button>
                 </div>
                 <SearchForm setDateHidden={setDateHidden} hiddenClass={hiddenClass} />
             </div>

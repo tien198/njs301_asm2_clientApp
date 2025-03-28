@@ -2,14 +2,14 @@ import { Await, useLoaderData } from 'react-router-dom';
 import { Suspense } from 'react';
 
 import Fallback from '../../components/Fallback';
-import Banner from './components/Banner';
+import Banner from './comps/Banner';
 import Contact from '../../components/Contact';
 
 import BackendURI from '../../utils/backendUri';
 
-import TypesList from './components/TypesList';
-import CitiesList from './components/CitiesList';
-import HotelsList from './components/HotelsList';
+import TypesList from './comps/TypesList';
+import CitiesList from './comps/CitiesList';
+import HotelsList from './comps/HotelsList';
 
 
 

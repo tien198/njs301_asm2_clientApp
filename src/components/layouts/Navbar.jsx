@@ -15,8 +15,8 @@ function Navbar() {
                 <div className='flex justify-between text-xl md:text-2xl'>
                     <div>Booking Website</div>
                     <div className='flex gap-5'>
-                        <Button label={'Register'} className={btnClasses} />
-                        <Button label={'Login'} className={btnClasses} />
+                        <Button className={btnClasses}>Register</Button>
+                        <Button className={btnClasses}>Login</Button>
                     </div>
                 </div>
                 <NavbarItems data={data} />
@@ -35,7 +35,7 @@ function NavbarItems({ data }) {
             {
                 data.map((item, i) => {
                     const isActive = active === i ? true : false;
-                    return <NavbarItem item={item} key={item.type} isActive={isActive} onClick={e => onActive(i)} />
+                    return <NavbarItem item={item} key={item.type} isActive={isActive} onClick={() => onActive(i)} />
                 })
             }
         </div>)

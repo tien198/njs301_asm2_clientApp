@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/home";
 import Detail from "./pages/detail/Detail";
-import Search from "./pages/search/Search";
+import Search from "./pages/search";
 import Root from "./pages/Root";
 
 const router = createBrowserRouter([
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/", element: <Home />,
-        loader: () => import('./pages/home/index').then(i => i.loader())
+        loader: () => import('./pages/home').then(i => i.loader())
       },
       {
         path: "/search", element: <Search />
