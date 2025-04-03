@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = { total: 0, result: [] }
+const initialState = { total: 0, results: [] }
 const searchedSlice = createSlice({
     name: 'searched',
     initialState,
     reducers: {
-        // payload= { total: Number, result: Hotels[] }
+        // payload= { total: Number, res: Hotels[] }
         setSearched(state, action) {
-            state = action.payload
+            state.results = action.payload.res
         }
     }
 })

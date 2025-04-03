@@ -3,6 +3,7 @@ class BackendUri {
     static cities = this.base + '/cities'
     static types = this.base + '/types'
     static hotels = this.base + '/hotels'
+    static searchHotels = this.base + '/search-hotels'
 }
 
 export default BackendUri;

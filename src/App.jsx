@@ -16,7 +16,8 @@ const router = createBrowserRouter([
         loader: () => import('./pages/home').then(i => i.loader())
       },
       {
-        path: "/search", element: <Search />
+        path: "/search", element: <Search />,
+        action: args => import('./pages/search').then(i => i.search(args))
       },
       {
         path: "/detail/:id", element: <Detail />
