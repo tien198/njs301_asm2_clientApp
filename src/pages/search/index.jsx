@@ -21,7 +21,7 @@ function Search() {
         <div className='lg:col-start-2 lg:col-end-5 flex flex-col gap-3'>
           {
             results.map(data => {
-              return <SearchedItem item={data} key={data.image_url} />
+              return <SearchedItem item={data} key={data._id} />
             })
           }
         </div>

@@ -15,18 +15,18 @@ export default function SearchSidebarForm() {
                     </div>
                     <div className='w-full'>
                         Check-in Date
-                        <input type="text" name='check-in-date' defaultValue={dateRange} placeholder='06/24/2022 to 06/24/2022' className='block w-full p-2 outline-none' />
+                        <input type="text" name='checkInDate' defaultValue={dateRange} placeholder='06/24/2022 to 06/24/2022' className='block w-full p-2 outline-none' />
                     </div>
                     <div className='w-full'>
                         Options
                         <div className='flex flex-col gap-2 container text-gray-800'>
                             <div className='flex justify-between mx-4'>
                                 <span>Min price per night</span>
-                                <input type='number' name='min-price' className='max-w-20 border border-gray-500 p-1' />
+                                <input type='number' name='minPrice' className='max-w-20 border border-gray-500 p-1' />
                             </div>
                             <div className='flex justify-between mx-4'>
                                 <span>Max price per night</span>
-                                <input type='number' name='max-price' className='max-w-20 border border-gray-500 p-1' />
+                                <input type='number' name='maxPrice' className='max-w-20 border border-gray-500 p-1' />
                             </div>
                             <div className='flex justify-between mx-4'>
                                 <span>Adult</span>
