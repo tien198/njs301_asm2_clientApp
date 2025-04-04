@@ -7,6 +7,10 @@ import Detail from "./pages/detail/Detail";
 import Search from "./pages/search";
 import Root from "./pages/Root";
 
+import AuthenRoot from './pages/authentication'
+import Login from './pages/authentication/login'
+import SignUp from './pages/authentication/signup'
+
 const router = createBrowserRouter([
   {
     path: "/", element: <Root />,
@@ -21,6 +25,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/detail/:id", element: <Detail />
+      }
+    ]
+  },
+  {
+    path: '/authen', element: <AuthenRoot />,
+    children: [
+      {
+        path: 'login', element: <Login />
+      },
+      {
+        path: 'signup', element: <SignUp />
       }
     ]
   }

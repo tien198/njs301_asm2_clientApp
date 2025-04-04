@@ -1,4 +1,4 @@
-import BackendUri from '../../../utilities/backendUri';
+import BackendUri from '../../../utilities/enums/backendUri';
 
 function Type({ type }) {
     return (

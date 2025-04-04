@@ -6,7 +6,7 @@ import store from '../../store'
 
 import SearchedItem from './comps/SearchedItem'
 import SearchSidebarForm from './comps/SearchSidebarForm'
-import BackendUri from '../../utilities/backendUri';
+import BackendUri from '../../utilities/enums/backendUri';
 
 function Search() {
   const results = useSelector(({ searchedHotels }) => searchedHotels.results)
