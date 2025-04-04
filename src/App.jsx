@@ -8,23 +8,23 @@ import Search from "./pages/search";
 import Root from "./pages/Root";
 
 import AuthenRoot from './pages/authentication'
-import Login from './pages/authentication/login'
-import SignUp from './pages/authentication/signup'
+import Login from './pages/authentication/Login'
+import SignUp from './pages/authentication/Signup'
 
 const router = createBrowserRouter([
   {
     path: "/", element: <Root />,
     children: [
       {
-        path: "/", element: <Home />,
+        index: true, element: <Home />,
         loader: () => import('./pages/home').then(i => i.loader())
       },
       {
-        path: "/search", element: <Search />,
+        path: "search", element: <Search />,
         action: args => import('./pages/search').then(i => i.search(args))
       },
       {
-        path: "/detail/:id", element: <Detail />
+        path: "detail/:id", element: <Detail />
       }
     ]
   },
@@ -32,10 +32,12 @@ const router = createBrowserRouter([
     path: '/authen', element: <AuthenRoot />,
     children: [
       {
-        path: 'login', element: <Login />
+        path: 'login', element: <Login />,
+        // action:args => import('./pages/authentication/Login').then(i=>i.action(args))
       },
       {
-        path: 'signup', element: <SignUp />
+        path: 'signup', element: <SignUp />,
+        action: args => import('./pages/authentication/Signup').then(i => i.action(args))
       }
     ]
   }
