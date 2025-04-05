@@ -1,6 +1,8 @@
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import ErrorMsg from "./comps/ErrorMsg";
 import { useEffect, useState } from "react";
+import { addJwt } from "../../utilities/localStorageUtils/authenToken";
+import BackendUri from "../../utilities/enums/backendUri";
 // import BackendUri from "../../utilities/enums/backendUri";
 
 function Login() {
@@ -38,8 +40,22 @@ function Login() {
 
 export default Login;
 
-// export async function action() {
-//     fetch(BackendUri.login, {
-//         method: 
-//     })
-// }
+
+
+export async function action ({ request }) {
+    const formData = Object.fromEntries((await request.formData()).entries())
+    try {
+      const res = await fetch(BackendUri.login, {
+        method: request.method,
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      if (!res.ok)
+        return res
+
+      addJwt(await res.json())
+      return redirect('/')
+    } catch (err) { console.error(err) }
+  }

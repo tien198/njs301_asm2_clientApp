@@ -1,5 +1,5 @@
-class StorageEnum {
-    static authenToken = 'authen-token'
-    static userInfor = 'user-infor'
+const StorageEnum = {
+    authenToken: 'authen-token',
+    userInfor: 'user-infor',
 }
 export default StorageEnum

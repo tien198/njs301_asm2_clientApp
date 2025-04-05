@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
 import ImgCard from '../../../components/Imgcard';
-import Button from '../../../components/Button';
 
 
 import styles from '../Search.module.css';
+import ClientAppUri from '../../../utilities/enums/clientAppUri';
 
 export default function SearchedItem({ item }) {
     return (
@@ -48,10 +48,9 @@ function Item_Rating_Price({ item }) {
             <div className='flex flex-col items-end gap-2'>
                 <span className='text-3xl font-semibold'>$ {item.cheapestPrice}</span>
                 <span className='text-gray-500 text-sm'>Include taxes and fees</span>
-                <Link to='/detail/1'>
-                    <Button className='bg-blue-600 text-white hover:bg-blue-800 font-semibold rounded-md py-3 px-8'>
+                <Link to={ClientAppUri.ClientApp_AbsoluteURI.detail + '/' + item._id}
+                    className='bg-blue-600 text-white hover:bg-blue-800 font-semibold rounded-md py-3 px-8'>
                         See availability
-                    </Button>
                 </Link>
             </div>
         </div>
