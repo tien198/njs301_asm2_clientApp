@@ -1,0 +1,1 @@
+GET http://localhost:5000/hotel/6311a9c64a642f01423490bf HTTP/1.1

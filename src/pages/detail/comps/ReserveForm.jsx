@@ -1,20 +1,37 @@
 import { useState } from "react";
+import { DateRange } from "react-date-range";
 
-export default function HotelBookingForm() {
+import Room from '../../../dataModels/room'
+import {  convertStringToDateRange } from '../../home/utils/dateRangeUtils'
+
+
+export default function HotelBookingForm({ hotel }) {
   const [checkIn, setCheckIn] = useState("2022-09-04");
   const [checkOut, setCheckOut] = useState("2022-09-04");
+
+  const [dateR, setDateR] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ])
   const [selectedRooms, setSelectedRooms] = useState([]);
+  // const [selectedRooms, setSelectedRooms] = useState(hotel.roomsList || []);
   const [total, setTotal] = useState(0);
 
-  const rooms = [
-    { id: "101", type: "Budget Double Room", price: 350 },
-    { id: "201", type: "Budget Double Room", price: 350 },
-    { id: "202", type: "Budget Double Room", price: 350 },
-    { id: "301", type: "Budget Double Room", price: 350 },
-    { id: "401", type: "Budget Twin Room", price: 350 },
-    { id: "402", type: "Budget Twin Room", price: 350 },
-    { id: "404", type: "Budget Twin Room", price: 350 },
-  ];
+  function onChangeDateR(e) {
+     setDateR(prev => {
+                let dateRange = convertStringToDateRange(e.target.value)
+                const defRange = dateRange[0]
+                if (!(defRange.startDate.toString() == 'Invalid Date') && !(defRange.endDate.toString() == 'Invalid Date'))
+                    return dateRange
+                else
+                    return prev
+            })
+  }
+
+  const rooms = selectedRooms.map(i => new Room(i))
 
   const handleRoomChange = (room) => {
     let updatedRooms = [...selectedRooms];
@@ -32,23 +49,14 @@ export default function HotelBookingForm() {
     <div className=" mx-auto space-y-6 text-gray-800">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Date Picker Section */}
-        <div>
-          <h2 className="text-xl font-semibold">Dates</h2>
-          <div className="flex space-x-4 mt-2">
-            <input
-              type="date"
-              value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-              className="border px-3 py-2 rounded w-full"
-            />
-            <input
-              type="date"
-              value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
-              className="border px-3 py-2 rounded w-full"
-            />
-          </div>
-        </div>
+        <DateRange
+          editableDateInputs={true}
+          onChange={onChangeDateR}
+          moveRangeOnFirstSelection={false}
+          ranges={dateR}
+          minDate={new Date(Date.now())}
+          // maxDate={new Date(2022, 1, 1)}
+        />
 
         {/* Reservation Info */}
         <div>
