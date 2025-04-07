@@ -17,6 +17,7 @@ import { addJwt } from "./utilities/localStorageUtils/authenToken";
 import clientAppUri from './utilities/enums/clientAppUri'
 const { ClientAppURI, AuthenURI } = clientAppUri
 
+
 const router = createBrowserRouter([
   {
     path: "/", element: <Root />,
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: ClientAppURI.detail + "/:hotelId", element: <Detail />,
         loader: args => import('./pages/detail').then(i => i.loader(args))
-      }
+      },
     ]
   },
   {
