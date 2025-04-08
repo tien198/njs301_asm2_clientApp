@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import Button from '../../components/Button';
 import GeneralInfo from './comps/GeneralInfo'
 import ImgGallery from './comps/ImgGallery'
-import ReserveForm from './comps/ReserveForm'
+import ReserveForm from './comps/reserveForm'
 
 import BackendUri from '../../utilities/enums/backendUri';
 
@@ -33,7 +33,7 @@ const Detail = () => {
         </div>
       </div>
       {
-        activeForm && <ReserveForm />
+        activeForm && <ReserveForm hotel={loader} />
       }
     </div>
   );
