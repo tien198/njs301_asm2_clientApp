@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Room from '../../../../dataModels/room'
 
@@ -11,13 +11,15 @@ import useStoreReserveForm from '../../store'
 
 export default function HotelBookingForm({ hotel }) {
 
-  // const {
-    // date, fullName, email, hotelId, rooms, price, payment
-  // } = useStoreReserveForm()
+  const {
+    date, fullName, email, hotelId, rooms, price, payment, phone, cardNumber
+  } = useStoreReserveForm()
+  const { setHotelId } = useStoreReserveForm()
 
-  const form = useStoreReserveForm()
+  useEffect(() => {
+    setHotelId(hotel._id)
+  }, [])
 
-  console.log(form)
   return (
     <div className=" mx-auto space-y-6 text-gray-800">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -36,7 +38,7 @@ export default function HotelBookingForm({ hotel }) {
       {/* Total + Action */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-lg font-semibold">Total Bill: ${form.price}</p>
+          <p className="text-lg font-semibold">Total Bill: ${price}</p>
           <select className="border px-3 py-2 rounded mt-2">
             <option>Select Payment Method</option>
             <option>Credit Card</option>

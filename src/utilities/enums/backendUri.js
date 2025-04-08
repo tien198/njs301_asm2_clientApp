@@ -9,6 +9,8 @@ const BackendUri = {
 
     login: base + '/login',
     signUp: base + '/sign-up',
+
+    transaction: base + '/transaction'
 }
 
 export default BackendUri;

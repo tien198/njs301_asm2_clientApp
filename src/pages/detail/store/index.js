@@ -14,7 +14,7 @@ const useStoreReserveForm = create(set => ({
     setEmail: (val) => set(() => ({ email: val })),
 
     hotelId: '',
-    setHotelId: (val) => set(() => ({ hotel: val })),
+    setHotelId: (val) => set(() => ({ hotelId: val })),
 
     // rooms: [{ roomId: '', roomNumbers: [''] }],
     rooms: [],
