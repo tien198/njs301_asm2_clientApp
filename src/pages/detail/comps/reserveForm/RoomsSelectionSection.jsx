@@ -16,7 +16,7 @@ export default ReserveForm_RoomsSelection;
 import useStoreReserveForm from '../../store'
 
 function Rooms({ room }) {
-    const { roomNumbers } = room
+    const { roomNumbers, title, desc, maxPeople, price } = room
 
     const { rooms, setRooms, } = useStoreReserveForm()
 
@@ -53,10 +53,10 @@ function Rooms({ room }) {
 
     return (
         <div>
-            <h6 className="font-semibold">Budget Double Room</h6>
-            <p className="text-sm text-gray-600">Pay nothing until September 04, 2022</p>
-            <p className="text-sm text-gray-600">Max people: 2</p>
-            <p className="font-medium">$350</p>
+            <h6 className="font-semibold">{title}</h6>
+            <p className="text-sm text-gray-600">{desc}</p>
+            <p className="text-sm text-gray-600">Max people: {maxPeople}</p>
+            <p className="font-medium">$ {price}</p>
             <div className="flex space-x-2 mt-2">
                 {roomNumbers.map((num) =>
                     <label key={num}>
