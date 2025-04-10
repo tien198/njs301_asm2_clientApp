@@ -8,9 +8,14 @@ import BackendUri from '../../../../utilities/enums/backendUri'
 function DatePickSection() {
   const { date, setDate } = useStoreReserveForm()
 
-  useEffect(()=>{
-    fetch(BackendUri.transaction)
-  },[date])
+  useEffect(() => {
+    fetch(BackendUri.checkAvailabilityRooms)
+      .then(res => res.json())
+      .then(rooms => {
+
+      })
+      .catch(err => console.error(err))
+  }, [date])
 
   return (
     <div className="flex justify-center">
