@@ -10,7 +10,7 @@ const BackendUri = {
     login: base + '/login',
     signUp: base + '/sign-up',
 
-    checkAvailabilityRooms: base + '/check-availability-rooms',
+    checkBookedRooms: base + '/check-booked-rooms',
     addTransaction: base + '/add-transaction'
 }
 

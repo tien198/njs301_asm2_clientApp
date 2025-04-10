@@ -9,10 +9,10 @@ function DatePickSection() {
   const { date, setDate } = useStoreReserveForm()
 
   useEffect(() => {
-    fetch(BackendUri.checkAvailabilityRooms)
+    fetch(BackendUri.checkBookedRooms)
       .then(res => res.json())
       .then(rooms => {
-
+        
       })
       .catch(err => console.error(err))
   }, [date])
