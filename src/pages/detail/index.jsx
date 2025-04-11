@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import Button from '../../components/Button';
@@ -7,11 +7,20 @@ import ImgGallery from './comps/ImgGallery'
 import ReserveForm from './comps/reserveForm'
 
 import BackendUri from '../../utilities/enums/backendUri';
+import useStoreReserveForm from './store';
 
 const Detail = () => {
   const loader = useLoaderData()
   const [activeForm, setActiveForm] = useState(false)
 
+  const {
+    setHotelId
+  }  = useStoreReserveForm()
+
+  useEffect(()=>{
+    setHotelId(loader._id)
+  },[])
+  
   return (
     <div className='container mx-auto mt-6 px-5 md:px-7'>
       <GeneralInfo item={loader} />

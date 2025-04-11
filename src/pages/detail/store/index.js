@@ -20,6 +20,9 @@ const useStoreReserveForm = create(set => ({
     rooms: [],
     setRooms: (val) => set(() => ({ rooms: val })),
 
+    bookedRooms: [],
+    setBookedRooms: (val) => set(() => ({ bookedRooms: val })),
+
     price: '',
     setPrice: (val) => set(() => ({ price: val })),
 
