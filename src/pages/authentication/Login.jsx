@@ -1,18 +1,20 @@
-import { Form, redirect, useActionData } from "react-router-dom";
-import ErrorMsg from "./comps/ErrorMsg";
 import { useEffect, useState } from "react";
+import { Form, redirect, useActionData } from "react-router-dom";
+
+import ErrorMsg from "./comps/ErrorMsg";
+
 import { addJwt } from "../../utilities/localStorageUtils/authenToken";
 import BackendUri from "../../utilities/enums/backendUri";
-// import BackendUri from "../../utilities/enums/backendUri";
+import store from '../../store'
 
 function Login() {
     const actionData = useActionData()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [credentialError, setCredentialError] = useState('')
-    
+
     useEffect(() => {
-        if(actionData && actionData.errors && actionData.errors.credential)
+        if (actionData && actionData.errors && actionData.errors.credential)
             setCredentialError(actionData.errors.credential)
     }, [actionData])
     useEffect(() => {
@@ -42,20 +44,27 @@ export default Login;
 
 
 
-export async function action ({ request }) {
+export async function action({ request }) {
     const formData = Object.fromEntries((await request.formData()).entries())
     try {
-      const res = await fetch(BackendUri.login, {
-        method: request.method,
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-      if (!res.ok)
-        return res
+        const res = await fetch(BackendUri.login, {
+            method: request.method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        if (!res.ok)
+            return res
 
-      addJwt(await res.json())
-      return redirect('/')
+        const tokenVsPayload = await res.json()
+        addJwt(tokenVsPayload)
+
+        store.dispatch({
+            type: 'authen/setAuthen',
+            payload: tokenVsPayload.user
+        })
+
+        return redirect('/')
     } catch (err) { console.error(err) }
-  }
+}

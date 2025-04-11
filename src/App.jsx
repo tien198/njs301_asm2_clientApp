@@ -46,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: AuthenURI.signup, element: <SignUp />,
         action: args => import('./pages/authentication/Signup').then(i => i.action(args))
+      },
+      {
+        path: AuthenURI.logout,
+        loader: () => import('./pages/authentication/Logout').then(i => i.action()),
       }
     ]
   }

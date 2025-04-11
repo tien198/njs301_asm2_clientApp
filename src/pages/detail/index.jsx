@@ -15,19 +15,19 @@ const Detail = () => {
 
   const {
     setHotelId
-  }  = useStoreReserveForm()
+  } = useStoreReserveForm()
 
-  useEffect(()=>{
+  useEffect(() => {
     setHotelId(loader._id)
-  },[])
-  
+  }, [])
+
   return (
     <div className='container mx-auto mt-6 px-5 md:px-7'>
       <GeneralInfo item={loader} />
       <ImgGallery item={loader} />
       <div className='grid grid-cols-1 md:grid-cols-4 gap-6 mt-10'>
         <div className='col-start-1 col-end-4 flex flex-col gap-5'>
-        <h5><strong className='text-3xl font-bold'>{loader.name}</strong></h5>
+          <h5><strong className='text-3xl font-bold'>{loader.name}</strong></h5>
           <p>{loader.desc}</p>
         </div>
         <div className='bg-blue-100 pt-4 px-3 pb-3 flex flex-col gap-4'>

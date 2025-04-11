@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
+
+import ErrorMsg from './comps/ErrorMsg'
+
 import { addJwt } from "../../utilities/localStorageUtils/authenToken";
 import BackendUri from "../../utilities/enums/backendUri";
-import ErrorMsg from './comps/ErrorMsg'
+
+import store from '../../store'
+
+
 
 function SignUp() {
     const actionData = useActionData()
@@ -59,7 +65,15 @@ export async function action({ request }) {
         })
         if (!response.ok)
             return await response.json()
-        addJwt(await response.json())
+
+        const tokenVsPayload = await response.json()
+        addJwt(tokenVsPayload)
+
+        store.dispatch({
+            type: 'authen/setAuthen',
+            payload: tokenVsPayload.user
+        })
+
         return redirect('/')
     } catch (err) { console.error(err) }
     return null

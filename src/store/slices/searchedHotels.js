@@ -5,7 +5,7 @@ const searchedSlice = createSlice({
     name: 'searched',
     initialState,
     reducers: {
-        // payload= { total: Number, res: Hotels[] }
+        // payload = { total: Number, res: Hotels[] }
         setSearched(state, action) {
             state.results = action.payload.res
         }
@@ -14,4 +14,4 @@ const searchedSlice = createSlice({
 
 export default searchedSlice.reducer
 
-export const searchedAction = searchedSlice.actions
+export const searchedActions = searchedSlice.actions
