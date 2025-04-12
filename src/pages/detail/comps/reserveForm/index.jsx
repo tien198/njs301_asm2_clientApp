@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { redirect, useFetcher, useNavigate, useSubmit } from "react-router-dom";
 
 import Room from '../../../../dataModels/room'
 
@@ -6,19 +7,33 @@ import ReserveForm_Infor from "./InforSection";
 import ReserveForm_RoomsSelection from "./RoomsSelectionSection";
 import DatePickSection from "./DatePickSection";
 
+import { ClientApp_AbsoluteURI } from '../../../../utilities/enums/clientAppUri'
 import useStoreReserveForm from '../../store'
-
+import ReserveFormReqBody from "../../../../dataModels/reserveFormReqBody";
+import BackendUri from "../../../../utilities/enums/backendUri";
 
 export default function HotelBookingForm({ hotel }) {
 
   const {
-    date, fullName, email, hotelId, rooms, price, payment, phone, cardNumber
+    date, fullName, email, hotelId, rooms, price, payment, phone, cardNumber,
+    resetForm
   } = useStoreReserveForm()
-  const { setHotelId } = useStoreReserveForm()
+  const state = useStoreReserveForm()
 
-  useEffect(() => {
-    setHotelId(hotel._id)
-  }, [])
+  // const fetcher = useFetcher()
+  const navigate = useNavigate()
+
+  async function submitReserveForm() {
+    const formData = {
+      startDate: date[0].startDate.toISOString(),
+      endDate: date[0].endDate.toISOString(),
+      fullName, email, hotelId, rooms, price, payment, phone, cardNumber
+    }
+    await action(formData)
+    await resetForm()
+
+    navigate('/')
+  }
 
   return (
     <div className=" mx-auto space-y-6 text-gray-800">
@@ -46,10 +61,36 @@ export default function HotelBookingForm({ hotel }) {
             <option>Cash on Arrival</option>
           </select>
         </div>
-        <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">
+        <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
+          onClick={submitReserveForm}>
           Reserve Now
         </button>
       </div>
     </div>
   );
+}
+
+
+async function action(reqBody) {
+  console.log(reqBody);
+  
+  try {
+    const res = await fetch(BackendUri.addTransaction, {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(reqBody)
+    })
+    if (res.ok) {
+      return
+    }
+    alert('fail to submit reserve form !')
+    return await res.json()
+  }
+  catch (err) {
+    console.error(err);
+    alert('fail to submit reserve form !')
+    return err
+  }
 }

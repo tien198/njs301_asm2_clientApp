@@ -12,9 +12,17 @@ export default class Hotel {
     type
     rating
 
-    static fromObject(obj) {
+    static assign(obj) {
         const hotel = new Hotel()
         Object.assign(hotel, obj)
+        return hotel
+    }
+    
+    static fromObject(obj) {
+        const hotel = new Hotel()
+        for (const key in hotel) {
+            hotel[key] = obj[key]
+        }
         return hotel
     }
 }

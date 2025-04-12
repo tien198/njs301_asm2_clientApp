@@ -14,7 +14,7 @@ const Detail = () => {
   const [activeForm, setActiveForm] = useState(false)
 
   const {
-    setHotelId
+    setHotelId,
   } = useStoreReserveForm()
 
   useEffect(() => {
@@ -60,5 +60,8 @@ export async function loader({ params }) {
     if (res.ok)
       return await res.json()
     return res
-  } catch (err) { console.error(err) }
+  } catch (err) {
+    console.error(err)
+    return null
+  }
 }

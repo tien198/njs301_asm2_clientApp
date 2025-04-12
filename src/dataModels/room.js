@@ -7,9 +7,17 @@ export default class Room {
     title
     updatedAt
 
-    static fromObject(obj) {
+    static assign(obj) {
         const room = new Room()
         Object.assign(room, obj)
+        return room
+    }
+
+    static fromObject(obj) {
+        const room = new Room()
+        for (const key in room) {
+            room[key] = obj[key]
+        }
         return room
     }
 }

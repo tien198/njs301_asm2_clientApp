@@ -29,8 +29,7 @@ function Rooms({ room }) {
                 roomId: room._id,
                 roomNumbers: [rNumber]
             }
-            rooms.push(inRoom)
-            setRooms(rooms)
+            setRooms([...rooms, inRoom])
             return
         }
 

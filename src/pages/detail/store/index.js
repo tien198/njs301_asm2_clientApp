@@ -1,39 +1,55 @@
 import { create } from 'zustand'
 
-const useStoreReserveForm = create(set => ({
-    // dateRange value format (in DateRange library)
+const initialState = {
     date: [{
         startDate: new Date(), endDate: new Date(), key: 'selection'
     }],
+    fullName: '',
+    email: '',
+    hotelId: '',
+    // rooms: [{ roomId: '', roomNumbers: [''] }],
+    rooms: [],
+    bookedRooms: [],
+    price: 0,
+    payment: 'Credit',
+    phone: '',
+    cardNumber: '',
+}
+
+const useStoreReserveForm = create(set => ({
+    // dateRange value format (in DateRange library)
+    date: initialState.date,
     setDate: (val) => set(() => ({ date: val })),
 
-    fullName: '',
+    fullName: initialState.fullName,
     setFullName: (val) => set(() => ({ fullName: val })),
 
-    email: '',
+    email: initialState.email,
     setEmail: (val) => set(() => ({ email: val })),
 
-    hotelId: '',
+    hotelId: initialState.hotelId,
     setHotelId: (val) => set(() => ({ hotelId: val })),
 
     // rooms: [{ roomId: '', roomNumbers: [''] }],
-    rooms: [],
+    rooms: initialState.rooms,
     setRooms: (val) => set(() => ({ rooms: val })),
 
-    bookedRooms: [],
+    bookedRooms: initialState.bookedRooms,
     setBookedRooms: (val) => set(() => ({ bookedRooms: val })),
 
-    price: '',
+    price: initialState.price,
     setPrice: (val) => set(() => ({ price: val })),
 
-    payment: '',
+    payment: initialState.payment,
     setPayment: (val) => set(() => ({ payment: val })),
 
-    phone: '',
+    phone: initialState.phone,
     setPhone: (val) => set(() => ({ phone: val })),
 
-    cardNumber: '',
+    cardNumber: initialState.cardNumber,
     setCardNumber: (val) => set(() => ({ cardNumber: val })),
+
+    resetForm: () => set(() => initialState)
 }))
 
 export default useStoreReserveForm
