@@ -18,10 +18,15 @@ import useStoreReserveForm from '../../store'
 function Rooms({ room }) {
     const { roomNumbers, title, desc, maxPeople, price } = room
 
-    const { rooms, setRooms, } = useStoreReserveForm()
+    const {
+        rooms, bookedRooms,
+        setRooms } = useStoreReserveForm()
 
     const roomIndex = rooms.findIndex(i => i.roomId === room._id)
-    const roomS = rooms[roomIndex]
+    const availableRoom = rooms[roomIndex]
+
+    // const bookedRoom = bookedRooms.find(i => i.roomId === )
+
     function onCheck(rNumber) {
         // room not found! Insert this roomNumber
         if (roomIndex < 0) {
@@ -62,7 +67,9 @@ function Rooms({ room }) {
                         <input
                             type="checkbox"
                             value={num}
-                            checked={roomS ? roomS.roomNumbers.includes(num) : false}
+                            checked={(availableRoom && availableRoom.roomNumbers)
+                                ? availableRoom.roomNumbers.includes(num)
+                                : false}
                             onChange={() => onCheck(num)}
                         /> {num}
                     </label>

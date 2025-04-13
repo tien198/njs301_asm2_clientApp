@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
-import { redirect, useFetcher, useNavigate, useSubmit } from "react-router-dom";
-
-import Room from '../../../../dataModels/room'
+import { useNavigate } from "react-router-dom";
 
 import ReserveForm_Infor from "./InforSection";
 import ReserveForm_RoomsSelection from "./RoomsSelectionSection";
 import DatePickSection from "./DatePickSection";
 
-import { ClientApp_AbsoluteURI } from '../../../../utilities/enums/clientAppUri'
 import useStoreReserveForm from '../../store'
-import ReserveFormReqBody from "../../../../dataModels/reserveFormReqBody";
 import BackendUri from "../../../../utilities/enums/backendUri";
 
 export default function HotelBookingForm({ hotel }) {
@@ -18,7 +13,6 @@ export default function HotelBookingForm({ hotel }) {
     date, fullName, email, hotelId, rooms, price, payment, phone, cardNumber,
     resetForm
   } = useStoreReserveForm()
-  const state = useStoreReserveForm()
 
   // const fetcher = useFetcher()
   const navigate = useNavigate()
@@ -29,18 +23,22 @@ export default function HotelBookingForm({ hotel }) {
       endDate: date[0].endDate.toISOString(),
       fullName, email, hotelId, rooms, price, payment, phone, cardNumber
     }
-    await action(formData)
-    await resetForm()
+    const err = await action(formData)
 
-    navigate('/')
+    if (err) {
+      console.error(err)
+    }
+    else {
+      await resetForm()
+      navigate('/')
+    }
   }
 
   return (
     <div className=" mx-auto space-y-6 text-gray-800">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Date Picker Section */}
+        {/* Date Picker Section - InforForm*/}
         <DatePickSection />
-
         <ReserveForm_Infor />
       </div>
 
@@ -70,10 +68,9 @@ export default function HotelBookingForm({ hotel }) {
   );
 }
 
-
+// return Error object if fetch return error
+// othewise, return false
 async function action(reqBody) {
-  console.log(reqBody);
-  
   try {
     const res = await fetch(BackendUri.addTransaction, {
       method: 'post',
@@ -83,7 +80,7 @@ async function action(reqBody) {
       body: JSON.stringify(reqBody)
     })
     if (res.ok) {
-      return
+      return false
     }
     alert('fail to submit reserve form !')
     return await res.json()

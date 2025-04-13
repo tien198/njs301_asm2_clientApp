@@ -6,7 +6,9 @@ import BackendUri from '../../../../utilities/enums/backendUri'
 
 
 function DatePickSection() {
-  const { date, setDate, hotelId } = useStoreReserveForm()
+  const {
+    date, setDate, hotelId,
+    setBookedRooms } = useStoreReserveForm()
 
   useEffect(() => {
     const reqBody = {
@@ -23,8 +25,8 @@ function DatePickSection() {
       body: JSON.stringify(reqBody)
     })
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
+      .then(bookedRooms => {
+        setBookedRooms(bookedRooms)
       })
       .catch(err => console.error(err))
   }, [date])
