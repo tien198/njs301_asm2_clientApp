@@ -7,13 +7,19 @@ const initialState = {
     fullName: '',
     email: '',
     hotelId: '',
+    fetchedRooms: [],
     // rooms: [{ roomId: '', roomNumbers: [''] }],
-    rooms: [],
+    checkedRooms: [],
+    // bookedRooms: indicate rooms in boolean isbooked state with the same index
+    // bookedRooms: [[isBookedRoom,isBookedRoom], [isBookedRoom]]
+    // example: 
+    //       bookedRooms[0] ---indicate--- rooms[0].roomNumbers
     bookedRooms: [],
     price: 0,
     payment: 'Credit',
     phone: '',
     cardNumber: '',
+    totalBill: 0
 }
 
 const useStoreReserveForm = create(set => ({
@@ -30,12 +36,34 @@ const useStoreReserveForm = create(set => ({
     hotelId: initialState.hotelId,
     setHotelId: (val) => set(() => ({ hotelId: val })),
 
-    // rooms: [{ roomId: '', roomNumbers: [''] }],
-    rooms: initialState.rooms,
-    setRooms: (val) => set(() => ({ rooms: val })),
+    fetchedRooms: initialState.fetchedRooms,
+    setFetchedRooms: (val) => set(() => ({ fetchedRooms: val })),
 
+    // rooms: [{ roomId: '', roomNumbers: [''], price: 0 }],
+    checkedRooms: initialState.checkedRooms,
+    setCheckedRooms: (val) => set(() => ({ checkedRooms: val })),
+
+    // bookedOuts: [{ roomId: '', roomNumbers: [''] }],
+    // roomsList: [{ _id: '', roomNumbers: [''] }],
+    // true: isBooked
+    // fasle: otherwise
     bookedRooms: initialState.bookedRooms,
-    setBookedRooms: (val) => set(() => ({ bookedRooms: val })),
+    setBookedRooms: (bookedOuts) => set((state) => {
+        // ---- map => Array[]
+        const newVal = state.fetchedRooms.map(fRoom => {
+            const bItem = bookedOuts.find(i => i.roomId === fRoom._id)
+            if (bItem)
+                // ---- map => Boolean[]
+                return fRoom.roomNumbers.map(rNum => {
+                    const valNumbers = bItem.roomNumbers
+                    return valNumbers.includes(String(rNum))
+                })
+            else
+                // ---- map => Boolean[]
+                return fRoom.roomNumbers.map(() => false)
+        })
+        return { bookedRooms: newVal }
+    }),
 
     price: initialState.price,
     setPrice: (val) => set(() => ({ price: val })),
@@ -48,6 +76,12 @@ const useStoreReserveForm = create(set => ({
 
     cardNumber: initialState.cardNumber,
     setCardNumber: (val) => set(() => ({ cardNumber: val })),
+
+    // totalBill mutate in onCheck event that setCheckedRooms
+    // in - /detail/comps/reserveForm/RoomSelectionSection.jsx
+    totalBill: initialState.totalBill,
+    addToBill: (val) => set((state) => ({ totalBill: state.totalBill + val })),
+    minusToBill: (val) => set((state) => ({ totalBill: state.totalBill - val })),
 
     resetForm: () => set(() => initialState)
 }))

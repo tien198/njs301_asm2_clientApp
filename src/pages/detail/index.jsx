@@ -14,11 +14,12 @@ const Detail = () => {
   const [activeForm, setActiveForm] = useState(false)
 
   const {
-    setHotelId,
+    setHotelId, setFetchedRooms
   } = useStoreReserveForm()
 
   useEffect(() => {
     setHotelId(loader._id)
+    setFetchedRooms(loader.roomsList)
   }, [])
 
   return (

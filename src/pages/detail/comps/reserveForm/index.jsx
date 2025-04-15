@@ -10,7 +10,7 @@ import BackendUri from "../../../../utilities/enums/backendUri";
 export default function HotelBookingForm({ hotel }) {
 
   const {
-    date, fullName, email, hotelId, rooms, price, payment, phone, cardNumber,
+    date, fullName, email, hotelId, checkedRooms, price, payment, phone, cardNumber, totalBill,
     resetForm
   } = useStoreReserveForm()
 
@@ -21,7 +21,7 @@ export default function HotelBookingForm({ hotel }) {
     const formData = {
       startDate: date[0].startDate.toISOString(),
       endDate: date[0].endDate.toISOString(),
-      fullName, email, hotelId, rooms, price, payment, phone, cardNumber
+      fullName, email, hotelId, rooms: checkedRooms, price, payment, phone, cardNumber
     }
     const err = await action(formData)
 
@@ -51,7 +51,7 @@ export default function HotelBookingForm({ hotel }) {
       {/* Total + Action */}
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-lg font-semibold">Total Bill: ${price}</p>
+          <p className="text-lg font-semibold">Total Bill: ${totalBill}</p>
           <select className="border px-3 py-2 rounded mt-2">
             <option>Select Payment Method</option>
             <option>Credit Card</option>
