@@ -11,7 +11,7 @@ export default function HotelBookingForm({ hotel }) {
 
   const {
     date, fullName, email, hotelId, checkedRooms, price, payment, phone, cardNumber, totalBill,
-    resetForm
+    resetForm, setPayment
   } = useStoreReserveForm()
 
   // const fetcher = useFetcher()
@@ -52,11 +52,12 @@ export default function HotelBookingForm({ hotel }) {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-lg font-semibold">Total Bill: ${totalBill}</p>
-          <select className="border px-3 py-2 rounded mt-2">
+          <select className="border px-3 py-2 rounded mt-2"
+            value={payment} onChange={e => setPayment(e.target.value)}>
             <option>Select Payment Method</option>
-            <option>Credit Card</option>
-            <option>PayPal</option>
-            <option>Cash on Arrival</option>
+            <option value='Credit'>Credit Card</option>
+            <option value='Card'>Card</option>
+            <option value='Cash'>Cash on Arrival</option>
           </select>
         </div>
         <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
