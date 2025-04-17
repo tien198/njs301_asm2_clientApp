@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     userInfor: {
-        userName: '', fullName: '', phoneNumber: '', email: '', isAdmin: false
+        userId: '', userName: '', fullName: '', phoneNumber: '', email: '', isAdmin: false
     }
 }
 
@@ -10,7 +10,7 @@ const authenSlice = createSlice({
     name: 'authen',
     initialState,
     reducers: {
-        // payload = { userName: '', fullName: '', phoneNumber: '', email: '', isAdmin: false }
+        // payload = { userId:'', userName: '', fullName: '', phoneNumber: '', email: '', isAdmin: false }
         setAuthen(state, action) {
             state.userInfor = action.payload
         },
@@ -22,4 +22,4 @@ const authenSlice = createSlice({
 
 export default authenSlice.reducer
 
-export const authenActions = authenSlice.actions
+export const { setAuthen, resetAthen } = authenSlice.actions

@@ -3,6 +3,9 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import Home from "./pages/home";
 import Detail from "./pages/detail";
 import Search from "./pages/search";
@@ -12,11 +15,12 @@ import AuthenRoot from './pages/authentication'
 import Login from './pages/authentication/Login'
 import SignUp from './pages/authentication/Signup'
 import BackendUri from "./utilities/enums/backendUri";
-import { addJwt } from "./utilities/localStorageUtils/authenToken";
+import { getUserInfor } from "./utilities/localStorageUtils/authenToken";
 
 import clientAppUri, { ClientApp_AbsoluteURI } from './utilities/enums/clientAppUri'
 const { ClientAppURI, AuthenURI } = clientAppUri
 
+import { setAuthen } from './store/slices/authenSlice'
 
 
 const router = createBrowserRouter([
@@ -36,8 +40,8 @@ const router = createBrowserRouter([
         loader: args => import('./pages/detail').then(i => i.loader(args)),
       },
       // {
-        // path: ClientAppURI.reserveHotel, element: <></>,
-        // action: 
+      // path: ClientAppURI.reserveHotel, element: <></>,
+      // action: 
       // }
     ]
   },
@@ -61,6 +65,12 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const jwtUserInfor = getUserInfor()
+    const userInfor = JSON.parse(jwtUserInfor)
+    dispatch(setAuthen(userInfor))
+  })
   return <RouterProvider router={router} />
 }
 
