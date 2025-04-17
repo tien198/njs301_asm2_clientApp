@@ -2,7 +2,7 @@ import { Link, useFetcher } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { getJwt } from '../../utilities/localStorageUtils/authenToken';
-import { AuthenURI_Absolute } from '../../utilities/enums/clientAppUri'
+import { AuthenURI_Absolute, ClientApp_AbsoluteURI } from '../../utilities/enums/clientAppUri'
 
 function Navbar() {
     const btnClasses = 'text-base text-main-color bg-gray-50 px-4 hover:bg-gray-600 hover:text-white';
@@ -22,7 +22,7 @@ function Navbar() {
                         {!isAuth && <Link to={AuthenURI_Absolute.login} className={btnClasses}>Login</Link>}
 
                         {isAuth && <Link to={'/getError'} className='text-sm'>{userInfor.userName || userInfor.email}</Link>}
-                        {isAuth && <Link to='/' className={btnClasses}>Transaction</Link>}
+                        {isAuth && <Link to={ClientApp_AbsoluteURI.transaction} className={btnClasses}>Transaction</Link>}
                         {isAuth && <fetcher.Form action={AuthenURI_Absolute.logout} className='flex items-center'>
                             <button className={btnClasses}>Logout</button>
                         </fetcher.Form>}

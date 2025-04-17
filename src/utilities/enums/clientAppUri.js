@@ -4,14 +4,15 @@ export const ClientAppURI = {
     home: '/',
     search: 'search',
     detail: 'detail',
-    reserveHotel: 'reserve-hotel'
+    reserveHotel: 'reserve-hotel',
+    transaction: 'transaction'
 }
 
 export const ClientApp_AbsoluteURI = {
     home: '/',
     search: '/' + ClientAppURI.search,
     detail: '/' + ClientAppURI.detail,
-    reserveHotel: '/' + ClientAppURI.reserveHotel
+    transaction: '/' + ClientAppURI.transaction
 }
 
 

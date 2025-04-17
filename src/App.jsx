@@ -6,14 +6,14 @@ import {
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import Root from "./pages/Root";
 import Home from "./pages/home";
 import Detail from "./pages/detail";
 import Search from "./pages/search";
-import Root from "./pages/Root";
+import Transactions from "./pages/transactions";
 
-import AuthenRoot from './pages/authentication'
-import Login from './pages/authentication/Login'
-import SignUp from './pages/authentication/Signup'
+import authenRouter from './routes/authenRouter'
+
 import BackendUri from "./utilities/enums/backendUri";
 import { getUserInfor } from "./utilities/localStorageUtils/authenToken";
 
@@ -39,29 +39,13 @@ const router = createBrowserRouter([
         path: ClientAppURI.detail + "/:hotelId", element: <Detail />,
         loader: args => import('./pages/detail').then(i => i.loader(args)),
       },
-      // {
-      // path: ClientAppURI.reserveHotel, element: <></>,
-      // action: 
-      // }
-    ]
-  },
-  {
-    path: AuthenURI.base, element: <AuthenRoot />,
-    children: [
       {
-        path: AuthenURI.login, element: <Login />,
-        action: args => import('./pages/authentication/Login').then(i => i.action(args))
-      },
-      {
-        path: AuthenURI.signup, element: <SignUp />,
-        action: args => import('./pages/authentication/Signup').then(i => i.action(args))
-      },
-      {
-        path: AuthenURI.logout,
-        loader: () => import('./pages/authentication/Logout').then(i => i.action()),
+        path: ClientAppURI.transaction, element: <Transactions />,
+        loader: () =>
       }
     ]
-  }
+  },
+  authenRouter
 ])
 
 function App() {
