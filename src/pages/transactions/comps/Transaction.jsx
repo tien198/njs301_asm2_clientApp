@@ -20,7 +20,7 @@ function Transaction({ tran, index }) {
     const rNumsStr = tran?.rooms?.reduce((acc, curr) => acc + (acc ? ', ' : '') + ExLib.toString(curr.roomNumbers), '')
     const date = new Date(startDate).toLocaleDateString() + ' - ' + new Date(endDate).toLocaleDateString()
     return (
-        <tr key={tran.id} className="text-center border-t border-gray-300">
+        <tr key={tran.id} className={`text-center border-t border-gray-300 ${index % 2 !== 0 ? 'bg-gray-200' : ''}`}>
             <td className="px-4 py-2">{index}</td>
             <td className="px-4 py-2 text-left">{hotelRef?.name}</td>
             <td className="px-4 py-2">{rNumsStr}</td>

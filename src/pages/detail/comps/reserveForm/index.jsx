@@ -19,7 +19,7 @@ export default function HotelBookingForm({ hotel }) {
 
   const { userInfor } = useSelector(({ authen }) => authen)
   const user = {
-    userRef: userInfor.userId,
+    userId: userInfor.userId,
     userName: userInfor.userName
   }
   // const fetcher = useFetcher(res.status(401).send('Unauthorized'))
@@ -30,10 +30,9 @@ export default function HotelBookingForm({ hotel }) {
       user,
       startDate: date[0].startDate.toISOString(),
       endDate: date[0].endDate.toISOString(),
-      hotelRef: hotelId,
       price: totalBill,
       rooms: checkedRooms,
-      fullName, email, payment, phone, cardNumber
+      hotelId, fullName, email, payment, phone, cardNumber
     }
     const err = await action(formData)
 
