@@ -35,7 +35,7 @@ function DatePickSection() {
         setBookedRooms(bookedRooms)
       })
       .catch(err => console.error(err))
-  }, [date, hotelId])
+  }, [date, hotelId, setBookedRooms])
 
   return (
     <div className="flex justify-center">

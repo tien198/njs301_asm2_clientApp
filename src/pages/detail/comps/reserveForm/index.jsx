@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import ReserveForm_Infor from './InforSection';
@@ -8,7 +9,6 @@ import useStoreReserveForm from '../../store'
 import BackendUri from '../../../../utilities/enums/backendUri';
 import ClientAppUri from '../../../../utilities/enums/clientAppUri';
 import { getJwtToken } from '../../../../utilities/localStorageUtils/authenToken'
-import { useSelector } from 'react-redux';
 
 export default function HotelBookingForm({ hotel }) {
 
@@ -48,7 +48,7 @@ export default function HotelBookingForm({ hotel }) {
     }
     else {
       await resetForm()
-      navigate('/')
+      navigate(ClientAppUri.ClientApp_AbsoluteURI.transaction)
     }
   }
 
