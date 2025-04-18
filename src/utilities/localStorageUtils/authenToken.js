@@ -5,7 +5,7 @@ export function addJwt(authRes) {
     localStorage.setItem(StorageEnum.userInfor, JSON.stringify(authRes.user))
 }
 
-export function getJwt() {
+export function getJwtToken() {
     return localStorage.getItem(StorageEnum.authenToken)
 }
 

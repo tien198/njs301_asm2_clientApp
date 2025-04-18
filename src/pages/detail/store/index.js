@@ -65,8 +65,8 @@ const useStoreReserveForm = create(set => ({
         return { bookedRooms: newVal }
     }),
 
-    price: initialState.price,
-    setPrice: (val) => set(() => ({ price: val })),
+    // price: initialState.price,
+    // setPrice: (val) => set(() => ({ price: val })),
 
     payment: initialState.payment,
     setPayment: (val) => set(() => ({ payment: val })),

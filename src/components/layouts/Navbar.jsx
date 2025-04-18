@@ -1,13 +1,13 @@
 import { Link, useFetcher } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { getJwt } from '../../utilities/localStorageUtils/authenToken';
+import { getJwtToken } from '../../utilities/localStorageUtils/authenToken';
 import { AuthenURI_Absolute, ClientApp_AbsoluteURI } from '../../utilities/enums/clientAppUri'
 
 function Navbar() {
     const btnClasses = 'text-base text-main-color bg-gray-50 px-4 hover:bg-gray-600 hover:text-white';
 
-    const isAuth = getJwt()
+    const isAuth = getJwtToken()
     const userInfor = useSelector(({ authen }) => authen.userInfor)
 
     const fetcher = useFetcher()

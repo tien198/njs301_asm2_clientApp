@@ -7,20 +7,21 @@ import DatePickSection from './DatePickSection';
 import useStoreReserveForm from '../../store'
 import BackendUri from '../../../../utilities/enums/backendUri';
 import ClientAppUri from '../../../../utilities/enums/clientAppUri';
-import { getJwt } from '../../../../utilities/localStorageUtils/authenToken'
+import { getJwtToken } from '../../../../utilities/localStorageUtils/authenToken'
 import { useSelector } from 'react-redux';
-import ReqUser from '../../dataModels/reqUser';
 
 export default function HotelBookingForm({ hotel }) {
 
   const {
-    date, fullName, email, hotelId, checkedRooms, price, payment, phone, cardNumber, totalBill,
+    date, fullName, email, hotelId, checkedRooms, payment, phone, cardNumber, totalBill,
     resetForm, setPayment
   } = useStoreReserveForm()
 
   const { userInfor } = useSelector(({ authen }) => authen)
-  const user = ReqUser.fromObject(userInfor)
-
+  const user = {
+    userRef: userInfor.userId,
+    userName: userInfor.userName
+  }
   // const fetcher = useFetcher(res.status(401).send('Unauthorized'))
   const navigate = useNavigate()
 
@@ -29,7 +30,10 @@ export default function HotelBookingForm({ hotel }) {
       user,
       startDate: date[0].startDate.toISOString(),
       endDate: date[0].endDate.toISOString(),
-      fullName, email, hotelId, rooms: checkedRooms, price, payment, phone, cardNumber
+      hotelRef: hotelId,
+      price: totalBill,
+      rooms: checkedRooms,
+      fullName, email, payment, phone, cardNumber
     }
     const err = await action(formData)
 
@@ -92,7 +96,7 @@ async function action(reqBody) {
       method: 'post',
       headers: {
         'content-type': 'application/json',
-        'authorization': getJwt()
+        'authorization': getJwtToken()
       },
       body: JSON.stringify(reqBody)
     })

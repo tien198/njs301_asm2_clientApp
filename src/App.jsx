@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: ClientAppURI.transaction, element: <Transactions />,
-        loader: () =>
+        loader: () => import('./pages/transactions').then(i => i.loader())
       }
     ]
   },
