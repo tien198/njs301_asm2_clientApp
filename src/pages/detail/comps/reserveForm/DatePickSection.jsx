@@ -11,6 +11,12 @@ function DatePickSection() {
     setBookedRooms } = useStoreReserveForm()
 
   useEffect(() => {
+    // after submit reserve form, form vals in `useStoreReserveForm()` will be change to inital state
+    // it lead to `date` change and this useEffect() be re-execute
+    // So that! this condition will prevent re-execute when the inital state of hotelId='' (falsy)
+    if (!hotelId)
+      return
+
     const reqBody = {
       hotelId,
       startDate: date[0].startDate.toISOString(),
