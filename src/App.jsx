@@ -1,6 +1,5 @@
 import {
   createBrowserRouter,
-  redirect,
   RouterProvider,
 } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,11 +13,9 @@ import Transactions from "./pages/transactions";
 
 import authenRouter from './routes/authenRouter'
 
-import BackendUri from "./utilities/enums/backendUri";
 import { getUserInfor } from "./utilities/localStorageUtils/authenToken";
 
-import clientAppUri, { ClientApp_AbsoluteURI } from './utilities/enums/clientAppUri'
-const { ClientAppURI, AuthenURI } = clientAppUri
+import { ClientAppURI } from './utilities/enums/clientAppUri'
 
 import { setAuthen } from './store/slices/authenSlice'
 
