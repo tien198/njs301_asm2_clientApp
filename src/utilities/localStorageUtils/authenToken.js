@@ -6,7 +6,7 @@ export function addJwt(authRes) {
 }
 
 export function getJwtToken() {
-    return localStorage.getItem(StorageEnum.authenToken)
+    return localStorage.getItem(StorageEnum.authenToken) || '{}'
 }
 
 export function getUserInfor() {

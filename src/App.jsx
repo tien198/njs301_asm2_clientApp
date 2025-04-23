@@ -49,6 +49,9 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     const jwtUserInfor = getUserInfor()
+    if (!jwtUserInfor)
+      return
+    
     const userInfor = JSON.parse(jwtUserInfor)
     dispatch(setAuthen(userInfor))
   })
