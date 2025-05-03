@@ -14,12 +14,12 @@ const authenSlice = createSlice({
         setAuthen(state, action) {
             state.userInfor = action.payload
         },
-        resetAthen(state) {
-            state.userInfor = initialState.userInfor
+        resetAuthen() {
+            return initialState
         }
     }
 })
 
 export default authenSlice.reducer
 
-export const { setAuthen, resetAthen } = authenSlice.actions
+export const { setAuthen, resetAuthen } = authenSlice.actions

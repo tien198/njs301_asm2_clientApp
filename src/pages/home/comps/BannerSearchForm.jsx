@@ -87,7 +87,7 @@ export default function SearchForm({ setDateHidden, hiddenClass }) {
                     onChange={onSetDateBox}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
-                    className={`absolute top-12  ${hiddenClass}`} minDate={new Date(2022, 1, 1)} maxDate={new Date(Date.now())} />
+                    className={`absolute top-12  ${hiddenClass}`} minDate={new Date(Date.now())} />
 
                 <div className='flex gap-2 items-center'>
                     <FontAwesomeIcon icon={faFemale} className='text-gray-400 ' />

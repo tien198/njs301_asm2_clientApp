@@ -7,6 +7,8 @@ import store from '../../store'
 import SearchedItem from './comps/SearchedItem'
 import SearchSidebarForm from './comps/SearchSidebarForm'
 import BackendUri from '../../utilities/enums/backendUri';
+import { setSearched } from '../../store/slices/searchedHotels';
+import { setModalInfors, showModal } from '../../store/slices/modalSlice';
 
 function Search() {
   const results = useSelector(({ searchedHotels }) => searchedHotels.results)
@@ -19,10 +21,11 @@ function Search() {
         </div>
         {/* responsive lg:col-start-2 lg:col-end-5 */}
         <div className='lg:col-start-2 lg:col-end-5 flex flex-col gap-3'>
-          {
-            results.map(data => {
+          {results
+            ? results.map(data => {
               return <SearchedItem item={data} key={data._id} />
             })
+            : <span>There aren't hotel that match your requirement !</span>
           }
         </div>
       </div>
@@ -46,12 +49,16 @@ export async function search(args) {
   try {
     const results = await searched.json()
     console.log(`searched total: ${results.total} hotels`);
-    
-    const reduxAction = {
-      type: 'searched/setSearched',
-      payload: results
+    if (results.total > 0)
+      store.dispatch(setSearched(results))
+    else {
+      store.dispatch(setModalInfors({
+        status: 404,
+        message: `There aren't hotel that match your requirement !`
+      }))
+      store.dispatch(showModal())
+
     }
-    store.dispatch(reduxAction)
 
   }
   catch (err) {

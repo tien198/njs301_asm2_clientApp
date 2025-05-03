@@ -14,4 +14,4 @@ const searchedSlice = createSlice({
 
 export default searchedSlice.reducer
 
-export const searchedActions = searchedSlice.actions
+export const { setSearched } = searchedSlice.actions

@@ -14,9 +14,7 @@ import Transactions from "./pages/transactions";
 import authenRouter from './routes/authenRouter'
 
 import { getUserInfor } from "./utilities/localStorageUtils/authenToken";
-
 import { ClientAppURI } from './utilities/enums/clientAppUri'
-
 import { setAuthen } from './store/slices/authenSlice'
 
 
